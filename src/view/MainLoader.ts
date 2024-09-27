@@ -144,7 +144,9 @@ export default class MainLoader extends Scene {
     private loadMainScene() {
         this.cleanupUI();
         this.setupGlobals();
-        Globals.SceneHandler?.addScene('MainScene', MainScene, true);
+        setTimeout(() => {
+            Globals.SceneHandler?.addScene('MainScene', MainScene, true);
+        }, 1000);
     }
 
     private cleanupUI() {

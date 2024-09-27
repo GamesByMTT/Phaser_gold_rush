@@ -44,7 +44,6 @@ export class UiContainer extends Phaser.GameObjects.Container {
         // this.vaseInit();
     }
 
-
      /**
      * @method maxBetBtn used to increase the bet amount to maximum
      * @description this method is used to add a spirte button and the button will be used to increase the betamount to maximun example on this we have twenty lines and max bet is 1 so the max bet value will be 1X20 = 20
@@ -63,7 +62,7 @@ export class UiContainer extends Phaser.GameObjects.Container {
                 onComplete: ()=>{
                     this.maxbetBtn.setTexture("maxBetBtOnPressed")
                     this.maxbetBtn.disableInteractive()
-                    currentGameData.currentBetIndex = initData.gameData.Bets[initData.gameData.Bets.length - 1];
+                    currentGameData.currentBetIndex = initData.gameData.Bets.length - 1;
                     this.CurrentBetText.updateLabelText((currentGameData.currentBetIndex*20).toString());
                     this.CurrentLineText.updateLabelText(initData.gameData.Bets[initData.gameData.Bets.length - 1]);
                     this.scene.tweens.add({
@@ -100,6 +99,8 @@ export class UiContainer extends Phaser.GameObjects.Container {
             this.pBtn.disableInteractive();
             if (!currentGameData.isMoving) {
                 currentGameData.currentBetIndex++;
+                // console.log(currentGameData.currentBetIndex, "currentGameData.currentBetIndex");
+                
                 if (currentGameData.currentBetIndex >= initData.gameData.Bets.length) {
                     currentGameData.currentBetIndex = 0;
                 }
@@ -148,7 +149,7 @@ export class UiContainer extends Phaser.GameObjects.Container {
         const winPanel = this.scene.add.sprite(0, 0, 'winPanel');
         winPanel.setOrigin(0.5);
         // winPanel.setScale(0.8, 0.8)
-        winPanel.setPosition(gameConfig.scale.width/1.45, this.maxbetBtn.y);
+        winPanel.setPosition(gameConfig.scale.width/1.45, this.maxbetBtn.y - 5);
         const currentWining: any = ResultData.playerData.currentWining;
        
         this.currentWiningText = new TextLabel(this.scene, 0, 15, currentWining, 27, "#dab47b");
@@ -174,7 +175,7 @@ export class UiContainer extends Phaser.GameObjects.Container {
     balanceBtnInit() {
         const balancePanel = this.scene.add.sprite(0, 0, 'balancePanel');
         balancePanel.setOrigin(0.5);
-        balancePanel.setPosition(gameConfig.scale.width / 1.18, this.maxbetBtn.y);
+        balancePanel.setPosition(gameConfig.scale.width / 1.18, this.maxbetBtn.y - 5);
         const container = this.scene.add.container(balancePanel.x, balancePanel.y);
         // container.add(balancePanel);
         currentGameData.currentBalance = initData.playerData.Balance;

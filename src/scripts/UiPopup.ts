@@ -43,7 +43,7 @@ export class UiPopups extends Phaser.GameObjects.Container {
             this.buttonMusic("buttonpressed")
             this.openPopUp();
         }, 0, true);
-        this.menuBtn.setPosition( gameConfig.scale.width / 1.05, gameConfig.scale.height / 1.11 );
+        this.menuBtn.setPosition( gameConfig.scale.width / 1.05, gameConfig.scale.height / 1.12 );
         this.add(this.menuBtn);
     }
     exitButton(){
