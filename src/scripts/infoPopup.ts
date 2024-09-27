@@ -1,7 +1,7 @@
 import Phaser, { Scene } from "phaser";
 import { Globals, initData, ResultData } from "./Globals";
 import { gameConfig } from "./appconfig";
-const TextStyle = { fontFamily: "RobotoSlab", fontSize: '30px', color: '#fff', align: "left", wordWrap: { width: 1200, useAdvancedWrap: true } };
+const TextStyle = { fontFamily: "RobotoSlab", fontSize: '30px', color: '#dab47b', align: "left", wordWrap: { width: 1200, useAdvancedWrap: true } };
 
 export default class InfoScene extends Scene{
     pageviewContainer!: Phaser.GameObjects.Container;

@@ -3,7 +3,6 @@ import { Scene, GameObjects, Types } from 'phaser';
 import { Globals, ResultData, currentGameData, initData } from './Globals';
 import { TextLabel } from './TextLabel';
 import { gameConfig } from './appconfig';
-import MainScene from '../view/MainScene';
 import SoundManager from './SoundManager';
 // Define UiContainer as a Phaser Scene class
 export class UiContainer extends Phaser.GameObjects.Container {

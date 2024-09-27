@@ -4,6 +4,7 @@ import { gameConfig } from "./appconfig";
 import { UiContainer } from "./UiContainer";
 import SoundManager from "./SoundManager";
 import InfoScene from "./infoPopup";
+const TextStyle =  {color:"#db5b01", fontSize: "50px", fontFamily: 'RobotoSlab', align:"center"}
 
 export class UiPopups extends Phaser.GameObjects.Container {
     SoundManager: SoundManager;
@@ -80,7 +81,6 @@ export class UiPopups extends Phaser.GameObjects.Container {
             this.scene.textures.get('infoBtnH'),
         ];
         this.infoBtn = new InteractiveBtn(this.scene, infoBtnSprites, () => {
-            // info button 
             this.buttonMusic("buttonpressed")
             this.openPage();
         }, 2, false); // Adjusted the position index
@@ -89,7 +89,6 @@ export class UiPopups extends Phaser.GameObjects.Container {
     }
 
     openPopUp() {
-        // Toggle the isOpen boolean
         this.isOpen = !this.isOpen;
         this.menuBtn.setInteractive(false);
         if (this.isOpen) {
@@ -102,8 +101,7 @@ export class UiPopups extends Phaser.GameObjects.Container {
     }
 
     tweenToPosition(button: InteractiveBtn, index: number) {
-        const targetY =  this.menuBtn.y - (index * (this.menuBtn.height))
-       // Calculate the x position with spacing
+       const targetY =  this.menuBtn.y - (index * (this.menuBtn.height))
        button.setPosition(this.menuBtn.x, this.menuBtn.y)
         button.setVisible(true);
         this.scene.tweens.add({
@@ -161,8 +159,8 @@ export class UiPopups extends Phaser.GameObjects.Container {
 
          // Create scrollbar container
         const popupBg = this.scene.add.image(0, 0, 'settingHeading').setDepth(13);
-        const soundsImage = this.scene.add.text(-170, -120, "SOUNDS", {color:"#db5b01", fontSize: "50px", fontFamily: 'RobotoSlab', align:"center"}).setDepth(10).setScale(0.7);
-        const musicImage = this.scene.add.text(-170, 80, "MUSIC", {color:"#db5b01", fontSize: "50px", fontFamily: 'RobotoSlab', align:"center"}).setDepth(10).setScale(0.7);
+        const soundsImage = this.scene.add.text(-170, -120, "SOUNDS", TextStyle).setDepth(10).setScale(0.7);
+        const musicImage = this.scene.add.text(-170, 80, "MUSIC", TextStyle).setDepth(10).setScale(0.7);
         const SountoggleBg = this.scene.add.image(150, -100, "SoundToggleBg").setScale(0.7)
         const musicToggleBg = this.scene.add.image(150, 100, "SoundToggleBg").setScale(0.7)
 
@@ -182,7 +180,11 @@ export class UiPopups extends Phaser.GameObjects.Container {
         });
 
         musicToggleButton.on('pointerdown', () => {
+            console.log(musicOn, "musicOn");
+            
             musicOn = !musicOn;
+
+            console.log(musicOn, "afterchange");
             this.adjustMusicVolume(musicOn ? 1 : 0); // Assuming 1 is full volume
             musicToggleButton.setTexture(musicOn ? 'toggleOn' : 'toggleOff');
         });
@@ -210,13 +212,11 @@ export class UiPopups extends Phaser.GameObjects.Container {
 
    // Function to adjust sound volume
     adjustSoundVolume(level: number) {
-        console.log("level check sound", level);
         this.SoundManager.setMasterVolume(level);
     }
 
     // Function to adjust music volume
     adjustMusicVolume(level: number) {
-        console.log("level check music", level);
         this.SoundManager.setVolume("backgroundMusic", level);
     }
     
@@ -248,7 +248,7 @@ export class UiPopups extends Phaser.GameObjects.Container {
         popupBg.setAlpha(1); // Set background transparency
         this.exitBtn.disableInteractive();
 
-        const quitHeading = this.scene.add.text(-130, -150, "QUIT GAME", {color:"#db5b01", fontSize: "50px", fontFamily: 'RobotoSlab', align:"center" })
+        const quitHeading = this.scene.add.text(-130, -150, "QUIT GAME", TextStyle)
         // Add text to the popup
         const popupText = this.scene.add.text(-200, -50, "DO YOU REALLY WANT \n TO QUIT?", {color:"#935a49", fontSize: "40px", fontFamily: 'RobotoSlab', align:"center" });
         
@@ -275,8 +275,6 @@ export class UiPopups extends Phaser.GameObjects.Container {
             popupContainer.destroy();
             blurGraphic.destroy(); // Destroy blurGraphic when popup is closed
         }, 0, true);
-        // const yesText = this.scene.add.text(-130, 140, "YES", {color:"#000000", fontFamily:"RobotoSlab", fontSize:"30px"}).setOrigin(0.5)
-        // const noText = this.scene.add.text(130, 140, "NO", {color:"#000000", fontFamily:"RobotoSlab", fontSize:"30px"}).setOrigin(0.5)
         this.yesBtn.setPosition(-130, 150).setScale(0.8, 0.8);
         this.noBtn.setPosition(130, 150).setScale(0.8, 0.8);
        
